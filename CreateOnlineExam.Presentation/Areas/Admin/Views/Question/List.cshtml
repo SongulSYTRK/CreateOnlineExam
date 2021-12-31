@@ -1,0 +1,67 @@
+﻿@model List<GetQuestionVM>
+@{
+    ViewData["Title"] = "List";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Question List</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        
+                        <tr id="a_@item.Id">
+                            <td>@item.Id</td>
+                            <td>@item.Title</td>
+
+
+
+
+
+                            <td>
+                                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Update</a>
+                            </td>
+                            <td>
+                                @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>*@
+                                <input type="button" onclick="Delete('@item.Id')" value="Delete" name="Delete" class="btn btn-danger btn-sm" />
+                            </td>
+                            <td>
+                                <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-success">Detail</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Create" class="btn btn-block btn-dark">Create a Question</a>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function Delete(id) {
+        
+        $.ajax({
+            url: "Admin/Question/Delete/" + id,
+            type: "POST",
+            success: function () { $("#a_" + id).fadeOut(); }
+        });
+    }
+</script>

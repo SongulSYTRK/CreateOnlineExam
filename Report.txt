@@ -1,0 +1,52 @@
+
+
+
+matblazorsqllite 
+
+
+soruekle butonu oluþtur.bu sayfa acýlýnca soru list tipinde soru oluþturcam .soru listine add ile ekle. foreach ile dön . 
+
+
+
+
+Project Rapor: 
+
+1.Domain katmaný oluþturulur=> bu sýnýfta soyut sýnýflarým tanýmlanýr.
+      1.1 IBaseEntity için interface kullandým çünkü appuser ve appuserrole identity'den kalýtým almaktadýr. Coklu kalýtýmý desteklediði için interface kullandým.
+        Identity.EntityFramewrokCore(5.0.13) paketi indirildi  
+     1.2 Unitorwork kullanarak burada tüm repositorylerimle çalýþtýðmda her defasýnda datbase gitmek yerine toplu þekilde db'ye gitmesini saðlamk için transaction areea oluþturarak göndermeyi tercih ettim 
+2-Infrastructure katmanýmda domain katmanýnda oluþturduðum sýnýflarýmý implenet ettim.
+  Dbcontext nesnesiyle baðlantý saðladým 
+  IEntityTypeConfiguration'dan kalýtým alarak  oluþturduðum concrete ve abstract sýnýflarýma uyulmasý gereken kurallarý koydum
+  Database'imi çalýþtýrýrken dolu gelmesi için SeedData klasöründe tohumlama iþlemi gerçekleþtirdim
+   microsoft.entityframeworkcore.sqlserver paketi indirildi
+
+3-Application katmanýnda businesslarýmýn yer aldýðý katmandýr 
+   Third pat ioc container kullandým(IOC) => Autofac indirildi
+   Extensions klasörðünde  extension  methodlarý yer alýr
+   Models içinde datatransferobject ve get iþlemlerim için ViewModel classlarým mevcuttur
+   Validation klasöründe oluþturduðum models için kurallar belirledim  =>> FluentValidation paketi indirildi
+   Mapping iþlemlerim için Autommaper klasörümü oluþturdum   =>>> Automapper indirildi
+   Service klasöründe tüm business iþlemlerimin gerçekleþtiði service classlarým mevcuttur.
+4-Presentaion katmanýnda mvc design pattern kullanýldý
+  Admin ve member için kontroller arealar oluþturuldu. 
+  MainController'da login ve register businesslarý yer almaktadýr. 
+  Role atamasý gerçekleþtirildi
+  ExamPageController kýsmýnda bizim sýnavlarýmýz yer almaktadýr
+  question controller kýsmýnda soru oluþturma , olutþturulan sýnavýn detayýna gitmek gibi businesslar yer almaktadýr 
+  Role controller rol atama ve ekstra rol ekleme iþlemleri gerçekleþtirmektedir 
+
+  5-UI katmanýnda presentation katmanýnda model-view-controller için ayrý ayrý yazmak yerine Blazor katmaný oluþturmak istedim.
+  Presentation katmanýnda yapýlan iþlemler blazor katmanýnda yeninde yapýldý
+
+
+  Note: Projede yapýlamayan ve yetiþtirilmeyen bölümler 
+      1-sqllite kýsmýnda version hatasý yaþandýðý için sql üzerinde çalýþmalar gerçekleþtirildi. 
+      2-Oluþturulan sorularýn cevaplanma bölümü yapýlamadý 
+      3-wired.com üzerinden otomatik olarak verilerin gelmesi iþlemi yapýlamadý 
+
+
+
+
+
+

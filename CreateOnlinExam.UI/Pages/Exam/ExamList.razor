@@ -1,0 +1,161 @@
+﻿@page "/listexam"
+@inject IJSRuntime JSRuntime;
+@inject IUnitOfWork unitofwork;
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Text List</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+
+                        <th>ExamDate</th>
+                        <th>ExamTime</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in exams)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Title</td>
+
+                            <td>@item.ExamDate</td>
+                            <td>@item.ExamTime</td>
+                            <td>
+                                <a @onclick="@(async()=>OpenDialog(item.Id))" class="btn btn-sm btn-warning">Update</a>
+                               
+                            </td>
+                            <td>
+                                <a @onclick="@(async()=>Delete(item.Id))" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Create" class="btn btn-block btn-dark">Create a New Exam</a>
+
+
+            <a asp-controller="Question" asp-action="List" class="btn btn-block btn-dark">Question List</a>
+        </div>
+    </div>
+    <MatDialog @bind-IsOpen="@dialogIsOpen">
+        <MatDialogTitle>@selectedExam.Title</MatDialogTitle>
+        <MatDialogContent>
+            <EditForm Model="selectedExam">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="col-5">
+                        Title :
+                    </label>
+                    <InputText id="title" @bind-Value="selectedExam.Title" />
+                </div>
+                <div class="form-group">
+
+                    <label class="col-5">
+                        Description :
+                    </label>
+                    <InputText id="description" @bind-Value="selectedExam.Description" />
+                </div>
+                <div class="form-group">
+
+                    <label class="col-5">
+                        Exam Date :
+                    </label>
+                    <InputDate id="examDate" @bind-Value="selectedExam.ExamDate" />
+                </div>
+                <div class="form-group">
+
+                    <label class="col-5">
+
+                        Exam Time :
+                    </label>
+                    <InputNumber id="examTime" @bind-Value="selectedExam.ExamTime" />
+                </div>
+
+            </EditForm>
+        </MatDialogContent>
+        <MatDialogActions>
+            <MatButton OnClick="@(e=> { dialogIsOpen = false; })">Iptal</MatButton>
+            <MatButton OnClick="@Update">Update</MatButton>
+        </MatDialogActions>
+    </MatDialog>
+</div>
+
+
+@code {
+
+    private List<GetExamPageVM> exams = new List<GetExamPageVM>();
+    private ExamPage selectedExam = new ExamPage();
+    private static Action callGetList;
+    private bool dialogIsOpen = false;
+
+    protected override void OnInitialized()
+    {
+        callGetList = GetList;
+        GetList();
+    }
+
+    async void GetList()
+    {
+        var resultList = await unitofwork.ExamPageRepository.GetAll();
+        exams = resultList.Where(x => x.Status != CreateOnlineExam.Domain.Enums.Status.Passive).Select(x => new GetExamPageVM
+        {
+            Id = x.Id,
+            Description = x.Description,
+            Title = x.Title,
+            ExamDate = x.ExamDate,
+            ExamTime = x.ExamTime
+
+        }).ToList();
+        StateHasChanged();
+
+    }
+    [JSInvokable]
+    protected async void Delete(int id)
+    {
+        var entity = await unitofwork.ExamPageRepository.GetById(id);
+        unitofwork.ExamPageRepository.Delete(entity);
+        await unitofwork.Commit();
+
+        callGetList.Invoke();
+    }
+
+    [JSInvokable]
+    protected void Update()
+    {
+        //var entity = new ExamPage
+        //{
+        //    Id = selectedExam.Id,
+        //    Title = selectedExam.Title,
+        //    Description = selectedExam.Description,
+        //    ExamDate = selectedExam.ExamDate,
+        //    ExamTime = selectedExam.ExamTime
+
+        //};
+        unitofwork.ExamPageRepository.Update(selectedExam);
+        dialogIsOpen = false;
+        callGetList.Invoke();
+
+    }
+
+    async void OpenDialog(int id)
+    {
+        selectedExam = await unitofwork.ExamPageRepository.GetById(id);
+        dialogIsOpen = true;
+
+    }
+}

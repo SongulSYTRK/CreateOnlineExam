@@ -1,0 +1,90 @@
+﻿@page "/register"
+@inject IJSRuntime JSRuntime;
+@inject IUnitOfWork unitofwork;
+
+
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Register</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </head>
+    <body>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Register</h4>
+                        </div>
+                        <div class="card-body">
+                            <EditForm Model="model"  OnValidSubmit="@SaveUser">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label class="col-5">
+                                        FullName :
+                                    </label>
+                                    <InputText id="fullname" @bind-Value="model.FullName" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-5">
+                                        UserName :
+                                    </label>
+                                    <InputText id="username" @bind-Value="model.UserName" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-5">
+                                        Email :
+                                    </label>
+                                    <InputText id="email" @bind-Value="model.Email" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-5">
+                                        Password :
+                                    </label>
+                                    <InputText id="password" @bind-Value="model.Password" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-5">
+                                        ConfirmPassword :
+                                    </label>
+                                    <InputText id="confirmpassword" @bind-Value="model.ConfirmPassword" />
+                                </div>
+                                
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg float-right">Register</button>
+                                </div>
+                            </EditForm>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-action="LogIn" class="btn btn-block btn-dark" style="color:white;font-weight:bolder">Log In</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+
+    </body>
+    </html>
+
+@code {
+    private AppUser model = new AppUser();
+
+    private void SaveUser()
+    {
+        unitofwork.AppUserRepository.Add(model);
+
+        unitofwork.Commit();
+        model = new AppUser();
+       
+        StateHasChanged();
+
+    }
+}

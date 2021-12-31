@@ -1,0 +1,170 @@
+﻿@model UpdateQuestionDTO
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+
+<div class="container" style="margin-top:20px">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Detail Question</h4>
+
+            </div>
+
+
+            <div class="card-body">
+                <form asp-action="Detail" asp-route-id="@Model.Id">
+
+                    <div class="form-group">
+                       
+                      <h3 asp-for="ExamPageId" class="text-lg-center text-danger float-none">
+                       @Model.Title
+
+                         </h3>  
+                    </div>
+                    <div class="form-group">
+                        
+                        <p asp-for="ExamPageId" class="text-dark ">
+                            @Model.DescriptionText
+                        </p>
+                    </div>
+                   
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label asp-for="Description">Question 1</label>
+                                <p>@Model.Description</p>
+
+                            </div>
+
+
+
+                            <div class="form-group float-left">
+                                <label asp-for="A"></label>
+                                <input asp-for="A" asp-validation-for="A" placeholder="A" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="A" class=" text-danger "></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="B"></label>
+                                <input asp-for="B" asp-validation-for="B" placeholder="B" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="B" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="C"></label>
+                                <input asp-for="C" asp-validation-for="C" placeholder="C" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="C" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="D"></label>
+                                <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="D" class=" text-danger"></span>
+                            </div>
+                           >
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label asp-for="Description">Question 2</label>
+                                <p>@Model.Description</p>
+
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="A"></label>
+                                <input asp-for="A" asp-validation-for="A" placeholder="A" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="A" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="B"></label>
+                                <input asp-for="B" asp-validation-for="B" placeholder="B" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="B" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="C"></label>
+                                <input asp-for="C" asp-validation-for="C" placeholder="C" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="C" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="D"></label>
+                                <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="D" class=" text-danger"></span>
+                            </div>
+                           
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label asp-for="Description">Question 3</label>
+                                <p>@Model.Description</p>
+
+                            </div>
+
+
+                            <div class="form-group float-left">
+                                <label asp-for="A"></label>
+                                <input asp-for="A" asp-validation-for="A" placeholder="A" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="A" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="B"></label>
+                                <input asp-for="B" asp-validation-for="B" placeholder="B" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="B" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="C"></label>
+                                <input asp-for="C" asp-validation-for="C" placeholder="C" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="C" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="D"></label>
+                                <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="D" class=" text-danger"></span>
+                            </div>
+                           
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label asp-for="Description">Question 4</label>
+                                <p>@Model.Description</p>
+
+                            </div>
+
+
+                            <div class="form-group float-left">
+                                <label asp-for="A"></label>
+                                <input asp-for="A" asp-validation-for="A" placeholder="A" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="A" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="B"></label>
+                                <input asp-for="B" asp-validation-for="B" placeholder="B" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="B" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="C"></label>
+                                <input asp-for="C" asp-validation-for="C" placeholder="C" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="C" class=" text-danger"></span>
+                            </div>
+                            <div class="form-group float-left">
+                                <label asp-for="D"></label>
+                                <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
+                                <span asp-validation-for="D" class=" text-danger"></span>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="card-footer">
+                <a asp-area="Admin" asp-controller="Question" asp-action="List" class="btn btn-block btn-warning">Back To Exam Test List</a>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

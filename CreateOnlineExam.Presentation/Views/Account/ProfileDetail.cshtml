@@ -1,0 +1,21 @@
+﻿@model GetAppUserVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProfileDetail</title>
+
+</head>
+<body>
+    <img src="@Model.ImagePath" width="200" />
+
+    <h4>@Model.FullName</h4>
+    <h4>@Model.Email</h4>
+    <h4>@Model.UserName</h4>
+</body>
+</html>
