@@ -19,19 +19,19 @@
                 <form asp-action="Detail" asp-route-id="@Model.Id">
 
                     <div class="form-group">
-                       
-                      <h3 asp-for="ExamPageId" class="text-lg-center text-danger float-none">
-                       @Model.Title
 
-                         </h3>  
+                        <h3 asp-for="ExamPageId" class="text-lg-center text-danger float-none">
+                            @Model.Title
+
+                        </h3>
                     </div>
                     <div class="form-group">
-                        
+
                         <p asp-for="ExamPageId" class="text-dark ">
                             @Model.DescriptionText
                         </p>
                     </div>
-                   
+
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -63,7 +63,7 @@
                                 <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
                                 <span asp-validation-for="D" class=" text-danger"></span>
                             </div>
-                           >
+                            >
 
                         </div>
                         <div class="col-sm-6">
@@ -92,7 +92,7 @@
                                 <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
                                 <span asp-validation-for="D" class=" text-danger"></span>
                             </div>
-                           
+
                         </div>
 
                         <div class="col-sm-6">
@@ -123,7 +123,7 @@
                                 <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
                                 <span asp-validation-for="D" class=" text-danger"></span>
                             </div>
-                           
+
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group ">
@@ -153,17 +153,16 @@
                                 <input asp-for="D" asp-validation-for="D" placeholder="D" class="btn btn-outline-primary float-right" />
                                 <span asp-validation-for="D" class=" text-danger"></span>
                             </div>
-                           
+
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <input type="submit" value="Finish Exam" class="btn btn-primary btn-block " />
+                    </div>
                 </form>
             </div>
             <div class="card-footer">
                 <a asp-area="Admin" asp-controller="Question" asp-action="List" class="btn btn-block btn-warning">Back To Exam Test List</a>
-
-
-
             </div>
         </div>
     </div>

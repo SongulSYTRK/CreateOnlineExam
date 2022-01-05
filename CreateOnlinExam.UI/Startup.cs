@@ -34,28 +34,19 @@ namespace CreateOnlinExam.UI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options =>
-            {
-                //options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], x => x.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
-            });
-
-           
-
+            //services.AddDbContext<AppDbContext>(options =>
+            //{
+            //    //options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            //    options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], x => x.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
+            //});                    
             services.AddDbContext<AppDbContext>(option =>
             {
-                option.UseSqlite("Data Source = OnlineExam.db");
+                option.UseSqlite("Data Source = CreateOnlinExam.db");
             });
-
-
+            
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddMatBlazor();
-            services.AddSingleton<WeatherForecastService>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //services.AddTransient<IMapper>();
-            //services.AddScoped<IExamPageService, ExamPageService>();
-            //services.AddScoped<DbContext, AppContext>();
 
         }
 

@@ -1,14 +1,6 @@
 
 
 
-matblazorsqllite 
-
-
-soruekle butonu oluþtur.bu sayfa acýlýnca soru list tipinde soru oluþturcam .soru listine add ile ekle. foreach ile dön . 
-
-
-
-
 Project Rapor: 
 
 1.Domain katmaný oluþturulur=> bu sýnýfta soyut sýnýflarým tanýmlanýr.
@@ -22,7 +14,7 @@ Project Rapor:
    microsoft.entityframeworkcore.sqlserver paketi indirildi
 
 3-Application katmanýnda businesslarýmýn yer aldýðý katmandýr 
-   Third pat ioc container kullandým(IOC) => Autofac indirildi
+   Third part ioc container kullandým(IOC) => Autofac indirildi
    Extensions klasörðünde  extension  methodlarý yer alýr
    Models içinde datatransferobject ve get iþlemlerim için ViewModel classlarým mevcuttur
    Validation klasöründe oluþturduðum models için kurallar belirledim  =>> FluentValidation paketi indirildi
@@ -36,8 +28,10 @@ Project Rapor:
   question controller kýsmýnda soru oluþturma , olutþturulan sýnavýn detayýna gitmek gibi businesslar yer almaktadýr 
   Role controller rol atama ve ekstra rol ekleme iþlemleri gerçekleþtirmektedir 
 
-  5-UI katmanýnda presentation katmanýnda model-view-controller için ayrý ayrý yazmak yerine Blazor katmaný oluþturmak istedim.
-  Presentation katmanýnda yapýlan iþlemler blazor katmanýnda yeninde yapýldý
+  5-UI katmanýnda presentation katmanýnda model-view-controller için ayrý ayrý yazmak yerine Blazor katmaný oluþturarak tüm iþlemlerimi singlepage application oluþturmak istediðim için ayriyeten böyle bir çalýþma gerçekleþtirdim 
+   Presentation katmanýnda yapýlan iþlemler blazor katmanýnda yeniden yapýldý. Sqlite database kullanýldý. 
+
+    Not: Sqllite için presentation katmanýnda version hata almýþtým ama blazor kýsmýnda böyle bir hatayla  karþýlaþmadým. Sqllite kýsmý blazor tarafýnda calýþmaktadýr  ama mvc kýsmýnda çalýþmamaktadýr 
 
 
   Note: Projede yapýlamayan ve yetiþtirilmeyen bölümler 

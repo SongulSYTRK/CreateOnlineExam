@@ -1,0 +1,151 @@
+﻿@page "/document"
+@inject IJSRuntime JSRuntime;
+
+@inject DocumentServices documentservice;
+
+
+<div class="container">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Text List</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+
+                            <th>ExamDate</th>
+                            <th>ExamTime</th>
+
+                            <th>Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in documents)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Title</td>
+
+                                <td>@item.ExamDate</td>
+                                <td>@item.ExamTime</td>
+
+                                <td>
+                                    <a @onclick="@(async()=>Delete(item.Id))" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Create Document</h4>
+
+            </div>
+            <div class="card-body col-8">
+                <EditForm Model="input" OnValidSubmit="@SaveDocument">
+
+                    <DataAnnotationsValidator/>
+                    <ValidationSummary />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="col-5">
+                            Title :
+                        </label>
+                        <InputText id="title" @bind-Value="input.Title" />
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-5">
+                            Description :
+                        </label>
+                        <InputText id="description" @bind-Value="input.Description" />
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-5">
+                            Exam Date :
+                        </label>
+                        <InputDate id="examDate" @bind-Value="input.ExamDate" />
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-5">
+
+                            Exam Time :
+                        </label>
+                        <InputNumber id="examTime" @bind-Value="input.ExamTime" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg float-right">Kaydet</button>
+                    </div>
+                </EditForm>
+            </div>
+            <div class="card-footer">
+                <a asp-action="List" class="btn btn-block btn-dark" style="color:white;font-weight:bolder">Back To ExamList</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+@code {
+
+    private List<Document> documents = new List<Document>();
+    private Document input = new Document();
+    private static Action callGetList;
+
+    protected override void OnInitialized()
+    {
+        callGetList = GetList;
+        GetList();
+    }
+    async void GetList()
+    {
+        var resultList = await documentservice.GetAll();
+
+        StateHasChanged();
+
+    }
+
+    private void SaveDocument()
+    {
+        documentservice.Add(input);
+        input = new Document();
+        input.ExamDate = DateTime.Now;
+        StateHasChanged();
+
+    }
+
+    [JSInvokable]
+    protected async void Delete(int id)
+    {
+        var entity = await documentservice.GetById(id);
+        documentservice.Delete(entity);
+
+
+
+    }
+}
+
